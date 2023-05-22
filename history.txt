@@ -1,0 +1,25 @@
+docker image build . -t servidor-http:caddy
+
+docker container run \                 
+        --name server \
+  -p 3000:80 \
+  -v ./pages:/usr/src/pages \
+  -d servidor-http:caddy
+
+docker image build . -t custom-caddy:2.5.0-alpine
+
+docker container run             \        
+        --name my-caddy-server         \
+        -p 8080:80                     \
+        -v ./pages:/usr/src/pages      \
+        -d custom-caddy:2.5.0-alpine
+
+docker image build . -t custom-caddy
+
+docker container run                   \
+        --name my-caddy-server         \
+        -p 8080:80                     \
+        -v ./pages:/usr/src/pages      \
+        -d custom-caddy             
+
+
